@@ -78,18 +78,19 @@ def extract_state_pickup(env, dir):
     return (agent, dir, key, door, open_door, box)
 
 if __name__ == "__main__":
-   env = gym.make("MiniGrid-Unlock-v0")
-   #env = gym.make("MiniGrid-RedBlueDoors-8x8-v0")
+   #env = gym.make("MiniGrid-Unlock-v0")
+   env = gym.make("MiniGrid-RedBlueDoors-8x8-v0")
    #env = gym.make("MiniGrid-Dynamic-Obstacles-8x8-v0")
 
    #env = gym.make("MiniGrid-UnlockPickup-v0")
    num_cells = env.unwrapped.grid.width * env.unwrapped.grid.height
 
-   normal_avg = dyna_normal(env=env, name="normal_unlock_env", num_planning_steps=10, num_episodes=1000, state_shape=UNLOCK_ENV_STATE_SHAPE(num_cells), nA=7, lr=0.05,epsilon_init=.05,gamma=.98, extract_state_func=extract_state_unlock)
-   print("FIN NORMAL")
-   ps_avg = dyna_ps(env=env, name="ps_unlock_env", num_planning_steps=25, num_episodes=1000, state_shape=UNLOCK_ENV_STATE_SHAPE(num_cells), nA=7, lr=0.05,epsilon_init=.5,gamma=.98, extract_state_func=extract_state_unlock)
+   #normal_avg = dyna_normal(env=env, name="normal_unlock_env", num_planning_steps=10, num_episodes=1000, state_shape=UNLOCK_ENV_STATE_SHAPE(num_cells), nA=7, lr=0.05,epsilon_init=.05,gamma=.98, extract_state_func=extract_state_unlock)
+   #print("FIN NORMAL")
+   #ps_avg = dyna_ps(env=env, name="ps_unlock_env", num_planning_steps=25, num_episodes=1000, state_shape=UNLOCK_ENV_STATE_SHAPE(num_cells), nA=7, lr=0.05,epsilon_init=.5,gamma=.98, extract_state_func=extract_state_unlock)
    # dyna(env)
-   #normal_avg = dyna_normal(env=env, name="normal_red_blue_env", num_planning_steps=20, num_episodes=1000, state_shape=RED_BLUE_STATE_SHAPE(num_cells), nA=7, lr=0.05,epsilon_init=.5, extract_state_func=extract_state_red_blue_door)
+   normal_avg = dyna_normal(env=env, name="normal_red_blue_env", num_planning_steps=20, num_episodes=1000, state_shape=RED_BLUE_STATE_SHAPE(num_cells), nA=7, lr=0.05,epsilon_init=.5, gamma=0.98, extract_state_func=extract_state_red_blue_door)
+   quit()
    #ps_avg = dyna_ps(env=env, name="ps_red_blue_env", num_planning_steps=20, num_episodes=1000, state_shape=RED_BLUE_STATE_SHAPE(num_cells), nA=7, lr=0.15,epsilon_init=.5, extract_state_func=extract_state_red_blue_door)
    
    #normal_avg = dyna_normal(env=env, name="normal_dyn_env", num_planning_steps=10, num_episodes=8000, state_shape=DYN_ENV_STATE_SHAPE(num_cells), nA=3, lr=0.05,epsilon_init=.3, extract_state_func=extract_state_dyn_ob)

@@ -1,4 +1,5 @@
 import numpy as np
+import gymnasium as gym
 import random
 import matplotlib.pyplot as plt
 
@@ -54,6 +55,9 @@ def dyna_normal(env, name, num_planning_steps, num_episodes, state_shape, nA, lr
 
     for i in range(num_episodes):
         print("EP NUMBER: ", i)
+        if i == 900:
+            env = gym.make("MiniGrid-RedBlueDoors-8x8-v0", render_mode="human")
+            env.reset()
         o, _ = env.reset()
         new_s = extract_state_func(env, o['direction'])
 
